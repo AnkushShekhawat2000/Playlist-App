@@ -37,6 +37,7 @@ public class Main {
 
         ListIterator<Song> itr = myPlaylist.listIterator();
         System.out.println("Now Playing:" + itr.next());
+        boolean wasNext = true;
 
         Scanner sc  = new Scanner(System.in);
 
@@ -55,6 +56,12 @@ public class Main {
 
                     break;
                 case 2:
+                    if(wasNext == false)
+                    {
+                        itr.next();
+                        wasNext = true;
+                    }
+
                     if(!itr.hasNext())
                     {
                         System.out.println("You have reached the end of the playlist");
@@ -62,19 +69,37 @@ public class Main {
                     else
                     {
                         System.out.println("Currently playing" + itr.next());
+                        wasNext = true;
                     }
                     break;
                 case 3:
+                    if(wasNext == true)
+                    {
+                        itr.previous();
+                        wasNext = false;
+                    }
                     if(!itr.hasPrevious())
                     {
-                        System.out.println("You are at start of the playlist: "+itr.previous());
+                        System.out.println("You are at start of the playlist: ");
                     }
                     else
                     {
                        System.out.println("Currently playing: " + itr.previous());
+                       wasNext = false;
                     }
                     break;
                 case 4:
+                    if(wasNext == true)
+                    {
+                        System.out.println("Currently playing" +itr.previous());
+                        wasNext = false;
+                    }
+                    else
+                    {
+                        System.out.println("Currently playing"+itr.next());
+                        wasNext = true;
+                    }
+
                     break;
                 case 5:
                     break;
